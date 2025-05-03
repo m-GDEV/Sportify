@@ -72,7 +72,7 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
           children: [
             SlideTransition(
               position: _offsetAnimation,
-              child: Icon(widget.icon, size: 26, color: iconColor),
+              child: Icon(widget.icon, size: 26, color: widget.isSelected ? Colors.white : iconColor),
             ),
             const SizedBox(height: 8),
             Text(
@@ -80,7 +80,7 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 13,
-                color: iconColor,
+                color: widget.isSelected ? Colors.white : iconColor,
               ),
             ),
           ],
