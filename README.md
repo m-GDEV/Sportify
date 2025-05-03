@@ -1,2 +1,3 @@
-# Aura
-Aura is an app that motivates you to do good deeds and contribute to the economy of favours.
+# Sportify
+
+A social community building app that allows you to find people with a common passion for sports.
