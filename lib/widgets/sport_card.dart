@@ -63,7 +63,7 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: bgColor,
+          color: widget.isSelected ? Colors.green[500] : Colors.green[50],
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: borderColor),
         ),

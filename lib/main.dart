@@ -63,10 +63,10 @@ class _MainNavigationState extends State<MainNavigation> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.blue[700], // Dark green for selected items
-        unselectedItemColor: Colors.blue[400], // Slightly lighter green for unselected items
-        selectedLabelStyle: TextStyle(color: Colors.blue[500]), // Ensure selected label matches selected item color
-        unselectedLabelStyle: TextStyle(color: Colors.blue[200]), // Ensure unselected label matches unselected item color
+        selectedItemColor: Colors.green[500], // Dark green for selected items
+        unselectedItemColor: Colors.green[300], // Slightly lighter green for unselected items
+        selectedLabelStyle: TextStyle(color: Colors.green[500], fontWeight: FontWeight.bold), // Ensure selected label matches selected item color
+        unselectedLabelStyle: TextStyle(color: Colors.green[300]), // Ensure unselected label matches unselected item color
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Players'),
