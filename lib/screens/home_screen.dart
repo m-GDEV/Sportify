@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'find_players_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -69,7 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: selectedSport != null
                     ? () {
-                        // Navigate to Find Players screen
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FindPlayersScreen(
+                                selectedSport: selectedSport!,
+                                ),
+                            ),
+                        );
                       }
                     : null,
                 child: const Text('Find Players'),
