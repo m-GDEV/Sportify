@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'find_players_screen.dart';
-
+import 'profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -50,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: const EdgeInsets.only(right: 12),
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: selectedSport == sport['name'] ? Colors.blue : Colors.grey[200],
+                        color: selectedSport == sport['name']
+                            ? Colors.blue
+                            : Colors.grey[200],
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -72,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: selectedSport != null
                     ? () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FindPlayersScreen(
-                                selectedSport: selectedSport!,
-                                ),
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FindPlayersScreen(
+                              selectedSport: selectedSport!,
                             ),
+                          ),
                         );
                       }
                     : null,
@@ -97,7 +99,21 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 // Navigate to location detail or map
               },
-            )
+            ),
+
+            /// ✅ JUST THIS BUTTON IS ADDED BELOW
+            const SizedBox(height: 24),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+                child: const Text("Go to Profile"),
+              ),
+            ),
           ],
         ),
       ),
