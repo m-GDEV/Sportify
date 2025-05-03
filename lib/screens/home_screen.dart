@@ -28,7 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sportify')),
+      appBar: AppBar(
+        title: Image.asset(
+          'lib/assets/Sportify_logo.png',
+          height: 65,
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
