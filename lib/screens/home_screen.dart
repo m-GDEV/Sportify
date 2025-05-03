@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'find_players_screen.dart';
+import '../widgets/sport_card.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -39,33 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: sports.map((sport) {
-                  return GestureDetector(
+                  return SportCard(
+                    name: sport['name'],
+                    icon: sport['icon'],
+                    isSelected: selectedSport == sport['name'],
                     onTap: () {
                       setState(() {
                         selectedSport = sport['name'];
                       });
                     },
-                    child: Container(
-                      width: 100,
-                      margin: const EdgeInsets.only(right: 12),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: selectedSport == sport['name'] ? Colors.blue : Colors.grey[200],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(sport['icon'], size: 24),
-                          const SizedBox(height: 8),
-                          Text(sport['name']),
-                        ],
-                      ),
-                    ),
                   );
                 }).toList(),
               ),
             ),
+
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
@@ -84,20 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Text('Find Players'),
               ),
             ),
-            const SizedBox(height: 32),
-            const Text(
-              'Review Locations',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            ListTile(
-              leading: const Icon(Icons.location_on),
-              title: const Text('City Sports Complex'),
-              subtitle: const Text('★★★★☆ 4.2'),
-              onTap: () {
-                // Navigate to location detail or map
-              },
-            )
+            
           ],
         ),
       ),

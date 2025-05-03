@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/player_tile.dart';
 
 class FindPlayersScreen extends StatelessWidget {
   final String selectedSport;
@@ -24,27 +25,13 @@ class FindPlayersScreen extends StatelessWidget {
         itemCount: filtered.length,
         itemBuilder: (context, index) {
           final player = filtered[index];
-          return Card(
-            margin: const EdgeInsets.all(8),
-            child: ListTile(
-              leading: CircleAvatar(child: Text(player['name'][0])),
-              title: Text(player['name']),
-              subtitle: Text('${player['sport']} at ${player['time']}'),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  5,
-                  (i) => Icon(
-                    i < player['rating'].round()
-                        ? Icons.star
-                        : Icons.star_border,
-                    size: 16,
-                    color: Colors.amber,
-                  ),
-                ),
-              ),
-            ),
+          return PlayerTile(
+            name: player['name'],
+            sport: player['sport'],
+            time: player['time'],
+            rating: player['rating'],
           );
+
         },
       ),
     );
