@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'find_players_screen.dart';
+<<<<<<< HEAD
 import 'profile_page.dart';
+=======
+import '../widgets/sport_card.dart';
+
+>>>>>>> fffedb7412e3938d56c1373913e049f848a34817
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,12 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: sports.map((sport) {
-                  return GestureDetector(
+                  return SportCard(
+                    name: sport['name'],
+                    icon: sport['icon'],
+                    isSelected: selectedSport == sport['name'],
                     onTap: () {
                       setState(() {
                         selectedSport = sport['name'];
                       });
                     },
+<<<<<<< HEAD
                     child: Container(
                       width: 100,
                       margin: const EdgeInsets.only(right: 12),
@@ -64,10 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
+=======
+>>>>>>> fffedb7412e3938d56c1373913e049f848a34817
                   );
                 }).toList(),
               ),
             ),
+
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
@@ -86,6 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Text('Find Players'),
               ),
             ),
+<<<<<<< HEAD
             const SizedBox(height: 32),
             const Text(
               'Review Locations',
@@ -114,6 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: const Text("Go to Profile"),
               ),
             ),
+=======
+            
+>>>>>>> fffedb7412e3938d56c1373913e049f848a34817
           ],
         ),
       ),
