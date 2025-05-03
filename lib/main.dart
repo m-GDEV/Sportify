@@ -17,7 +17,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sportify',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Color(0xFFF8F4FA), // light pastel
+        primaryColor: Color(0xFF388E3C),            // green
+        appBarTheme: AppBarTheme(
+          color: Color(0xFF388E3C),
+          iconTheme: IconThemeData(color: Colors.white),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.black87),
+          titleLarge: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       home: const MainNavigation(),
     );
