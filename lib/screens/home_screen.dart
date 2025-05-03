@@ -85,14 +85,24 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            ListTile(
-              leading: const Icon(Icons.location_on),
-              title: const Text('City Sports Complex'),
-              subtitle: const Text('★★★★☆ 4.2'),
-              onTap: () {
-                // Navigate to location detail or map
-              },
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.green[50],
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.green.shade100),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(Icons.location_on, color: Colors.green[700]),
+                title: Text('City Sports Complex', style: TextStyle(fontWeight: FontWeight.bold)),
+                subtitle: Text('★★★★☆ 4.2'),
+                onTap: () {
+                  // Navigate to location detail or map
+                },
+              ),
             ),
+
 
             /// ✅ JUST THIS BUTTON IS ADDED BELOW
             const SizedBox(height: 24),

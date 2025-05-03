@@ -32,12 +32,12 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
 
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
-      end: const Offset(0, -0.2), // upward jump
+      end: const Offset(0, -0.2),
     ).chain(CurveTween(curve: Curves.easeOut)).animate(_controller);
   }
 
   void _handleTap() {
-    widget.onTap(); // call the external tap handler
+    widget.onTap();
 
     _controller.forward().then((_) {
       _controller.reverse();
@@ -52,6 +52,10 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    final Color borderColor = widget.isSelected ? Colors.green.shade400 : Colors.green.shade100;
+    final Color bgColor = widget.isSelected ? Colors.green.shade100 : Colors.green.shade50;
+    final Color iconColor = widget.isSelected ? Colors.green[800]! : Colors.green[600]!;
+
     return GestureDetector(
       onTap: _handleTap,
       child: Container(
@@ -59,18 +63,26 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
         margin: const EdgeInsets.only(right: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: widget.isSelected ? Colors.blue : Colors.grey[200],
+          color: bgColor,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: borderColor),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SlideTransition(
               position: _offsetAnimation,
-              child: Icon(widget.icon, size: 24),
+              child: Icon(widget.icon, size: 26, color: iconColor),
             ),
             const SizedBox(height: 8),
-            Text(widget.name),
+            Text(
+              widget.name,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+                color: iconColor,
+              ),
+            ),
           ],
         ),
       ),
