@@ -148,14 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               const SizedBox(height: 24),
-              const Text(
-                'Leaderboard',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
               const SizedBox(height: 8),
               LeaderboardCard(players: leaderboardUsers),
             ],
