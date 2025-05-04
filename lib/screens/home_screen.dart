@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Hey Milind,\nwant to play today?',
+                'Hey Milind,\n what would you like to play today?',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -71,48 +71,26 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               SizedBox(
                 height: 80,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: sports.map((sport) {
-                    final isSelected = selectedSport == sport['name'];
-                    return Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      padding: const EdgeInsets.all(12),
-                      width: 100,
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.green[700] : Colors.grey[850],
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: isSelected
-                            ? [
-                                BoxShadow(
-                                  color: Colors.greenAccent.withOpacity(0.4),
-                                  blurRadius: 8,
-                                  spreadRadius: 1,
-                                )
-                              ]
-                            : [],
-                      ),
-                      child: InkWell(
+                child: SizedBox(
+                  height: 80,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: sports.map((sport) {
+                      final isSelected = selectedSport == sport['name'];
+                      return SportCard(
+                        name: sport['name'],
+                        icon: sport['icon'],
+                        isSelected: isSelected,
                         onTap: () {
                           setState(() {
                             selectedSport = sport['name'];
                           });
                         },
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(sport['icon'], size: 24, color: Colors.greenAccent),
-                            const SizedBox(height: 8),
-                            Text(
-                              sport['name'],
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                      );
+                    }).toList(),
+                  ),
                 ),
+
               ),
               const SizedBox(height: 20),
               if (selectedSport != null)

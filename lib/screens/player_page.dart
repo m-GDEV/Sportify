@@ -26,23 +26,27 @@ class PlayerPage extends StatelessWidget {
             ),
           ),
           child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            titleSpacing: 16,
-            title: Row(
-              children: const [
-                SizedBox(width: 10),
-                Text(
-                  'Player Profile',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          titleSpacing: 16,
+          iconTheme: const IconThemeData(
+            color: Colors.white, // Set back button color to white
           ),
+          title: Row(
+            children: const [
+              SizedBox(width: 10),
+              Text(
+                'Player Profile',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                  color: Colors.black, // Keep title text black if desired
+                ),
+              ),
+            ],
+          ),
+        ),
+
         ),
       ),
       body: SingleChildScrollView(

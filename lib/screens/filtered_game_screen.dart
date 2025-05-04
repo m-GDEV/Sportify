@@ -209,14 +209,14 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                   decoration: BoxDecoration(
-                    color: isFull ? Colors.grey[800] : Colors.green[50],
+                    color: isFull ? Colors.grey[800] : Colors.green,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.green[100]!),
                   ),
                   child: Text(
                     isFull ? 'Full' : 'RSVP to this Game',
                     style: TextStyle(
-                      color: isFull ? Colors.white54 : Colors.green[800],
+                      color: isFull ? Colors.white : Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       letterSpacing: 0.5,
