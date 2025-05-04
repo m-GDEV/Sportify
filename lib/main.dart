@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/find_players_screen.dart';
 import 'screens/review_locations_screen.dart';
-import 'screens/players_screen.dart';
+import 'screens/game_screen.dart';
 import 'screens/profile_page.dart';
 
 void main() {
@@ -46,7 +46,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    PlayersScreen(),
+    GamesScreen(),
     ReviewLocationsScreen(),
     ProfilePage(),
   ];
