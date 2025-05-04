@@ -28,15 +28,13 @@ class ReviewLocationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFFA8E6A2),
-                Color(0xFF6FCF97),
-              ],
+              colors: [Color(0xFF388E3C), Color(0xFF2E7D32)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -45,18 +43,17 @@ class ReviewLocationsScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
             automaticallyImplyLeading: false,
-            centerTitle: false, // left-aligns title
-            titleSpacing: 16,   // pushes it from the left
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
+            centerTitle: false,
+            titleSpacing: 16,
+            title: const Row(
+              children: [
                 SizedBox(width: 10),
                 Text(
                   'Nearby Locations',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
-                    color: Colors.black,
+                    color: Colors.white,
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -73,8 +70,8 @@ class ReviewLocationsScreen extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
-              color: Colors.green[50],
-              border: Border.all(color: Colors.green.shade100),
+              color: const Color(0xFF1E1E1E),
+              border: Border.all(color: Colors.green.shade700),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -94,10 +91,23 @@ class ReviewLocationsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(location['name'], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(
+                        location['name'],
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
                       const SizedBox(height: 6),
-                      Text('🏟️ Courts: ${location['courts']}'),
-                      Text('📍 ${location['distance']} • ⭐ ${location['rating']}'),
+                      Text(
+                        '🏟️ Courts: ${location['courts']}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        '📍 ${location['distance']} • ⭐ ${location['rating']}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                 )
