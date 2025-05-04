@@ -28,7 +28,43 @@ class ReviewLocationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Nearby Locations')),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFA8E6A2),
+                Color(0xFF6FCF97),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            centerTitle: false, // left-aligns title
+            titleSpacing: 16,   // pushes it from the left
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                SizedBox(width: 10),
+                Text(
+                  'Nearby Locations',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.black,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: locations.length,

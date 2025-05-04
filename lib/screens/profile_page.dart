@@ -3,42 +3,70 @@ import '../util/data_classes.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
-Widget build(BuildContext context) {
-  final user = dummyUser;
-
-  return Scaffold(
-    appBar: AppBar(
-      title: Text('Player Profile'),
-      backgroundColor: Colors.green[700],
-    ),
-    body: SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Profile Info
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 45,
-                foregroundImage: AssetImage('profile-pic.jpg'),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(user.name, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 4),
-                    Text(user.location, style: TextStyle(color: Colors.grey[700])),
-                    SizedBox(height: 4),
-                    Text("⚽ 🏀 🏸 Preferred Sports: ${user.preferredSports.join(', ')}", style: TextStyle(fontSize: 13)),
-                  ],
-                ),
-              ),
-            ],
+  Widget build(BuildContext context) {
+    final user = dummyUser;
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFA8E6A2),
+                Color(0xFF6FCF97),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            titleSpacing: 16,
+            title: Row(
+              children: const [
+                SizedBox(width: 10),
+                Text(
+                  'Player Profile',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Profile Picture + Basic Info
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 45,
+                  backgroundImage: AssetImage('assets/profile_pic.png'), // replace with real image
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("John Doe", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 4),
+                      Text("Toronto, ON", style: TextStyle(color: Colors.grey[700])),
+                      SizedBox(height: 4),
+                      Text("⚽ 🏀 🏸 Preferred Sports: Football, Basketball, Badminton", style: TextStyle(fontSize: 13)),
+                    ],
+                  ),
+                )
+              ],
+            ),
 
           SizedBox(height: 16),
 
@@ -118,15 +146,13 @@ Widget build(BuildContext context) {
       case 'tennis':
         return Icons.sports_tennis;
       case 'badminton':
-        return Icons.sports_tennis; // placeholder (no specific icon)
+        return Icons.sports_tennis; // placeholder
       case 'cricket':
         return Icons.sports_cricket;
       default:
-        return Icons.sports; // generic icon fallback
+        return Icons.sports;
     }
   }
-
-
 
   Widget _friendChip(String name) {
     return Chip(

@@ -63,37 +63,44 @@ class GamesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFFDFFFE1), Color(0xFFA8E6A2)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text("🏟️ ", style: TextStyle(fontSize: 22)),
-                Text(
-                  'Games Near Me',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.black87,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        appBar: PreferredSize(
+  preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+  child: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xFFA8E6A2), // light green
+          Color(0xFF6FCF97), // soft medium green
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
       ),
+    ),
+    child: AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      centerTitle: false, // left-aligns title
+      titleSpacing: 16,   // pushes it from the left
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          SizedBox(width: 10),
+          Text(
+            'Games Near Me',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22, // larger text
+              color: Colors.black, // clean black
+              letterSpacing: 0.7,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
 
       body: ListView.builder(
         itemCount: nearbyGames.length,

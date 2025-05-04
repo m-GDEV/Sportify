@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'find_players_screen.dart';
-import 'profile_page.dart';
 import '../widgets/sport_card.dart';
 import '../widgets/leaderboard_card.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,12 +37,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'lib/assets/Sportify_logo.png',
-          height: 65,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFA8E6A2),
+                Color(0xFF6FCF97),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(width: 10),
+                Image.asset(
+                  'lib/assets/Sportify_logo.png',
+                  height: 40,
+                ),
+              ],
+            ),
+          ),
         ),
-        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -76,42 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: selectedSport != null
-                      ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FindPlayersScreen(
-                                selectedSport: selectedSport!,
-                              ),
-                            ),
-                          );
-                        }
-                      : null,
-                  child: const Text('Find Players'),
-                ),
-              ),
-              const SizedBox(height: 12),
               LeaderboardCard(players: leaderboardData),
-              const SizedBox(height: 24),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
-                    );
-                  },
-                  child: const Text("Go to Profile"),
-                ),
-              ),
             ],
           ),
         ),
       ),
-
     );
   }
 }
