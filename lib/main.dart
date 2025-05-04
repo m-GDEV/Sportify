@@ -30,7 +30,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
       title: 'Sportify',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green),
+          ),
+          labelStyle: TextStyle(color: Colors.green),
+          floatingLabelStyle: TextStyle(color: Colors.green),
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.green[900],
+        ),
         fontFamily: 'Outfit',
       ),
       home: const MainNavigation(),
