@@ -69,7 +69,7 @@ class _MainNavigationState extends State<MainNavigation> {
         unselectedLabelStyle: TextStyle(color: Colors.green[300]), // Ensure unselected label matches unselected item color
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Players'),
+          BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'Games'),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Locations'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
