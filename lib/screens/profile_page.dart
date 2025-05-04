@@ -101,7 +101,7 @@ class ProfilePage extends StatelessWidget {
               children: user.stats.entries.map((e) => _statCard(e.key, e.value)).toList(),
             ),
 
-            Matches(user, externalPlayer),
+            Matches(user, !externalPlayer),
 
             const SizedBox(height: 24),
             const Text("Connections", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

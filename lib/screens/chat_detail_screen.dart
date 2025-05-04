@@ -1,9 +1,14 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:sportify/util/data_classes.dart';
+import 'package:sportify/util/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final String name;
+  final bool isEnabled;
 
-  const ChatDetailScreen({super.key, required this.name});
+  const ChatDetailScreen({super.key, required this.name, required this.isEnabled});
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
@@ -11,10 +16,19 @@ class ChatDetailScreen extends StatefulWidget {
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
   final TextEditingController _controller = TextEditingController();
-  final List<Map<String, String>> _messages = [
-    {'sender': 'them', 'text': 'Hey, ready for today’s game?'},
-    {'sender': 'me', 'text': 'Yeah! I’ll be there by 5.'},
-  ];
+  late final List<Map<String, String>> _messages;
+  void initState() {
+    super.initState();
+  if (!widget.isEnabled) {
+    _messages = [
+      {'sender': 'them', 'text': 'Hey, ready for today’s game?'},
+      {'sender': 'me', 'text': 'Yeah! I’ll be there by 5.'},
+    ];
+  }
+  else {
+    _messages = [];
+  }
+  }
 
   void _sendMessage() {
     final text = _controller.text.trim();
@@ -23,6 +37,17 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     setState(() {
       _messages.add({'sender': 'me', 'text': text});
       _controller.clear();
+    });
+  }
+
+  void _respondToMessage(BuildContext context) async {
+
+    var prompt = "You are an expert sports analyst. Provide detailed answers, but don't go crazy with the length. Remember you are chatting (texting) with the user. The user is trying to learn more about sports and how they can improve. You will act as their consultant and help them with anything they need to do. Make sure to respond with markdown. This is the user's information: ${dummyUser.toString()}, these are the messages so far: \n\n";
+    prompt = prompt + _messages.join("\n");
+    var response = await generateSummary(context, prompt);
+
+    setState(() {
+      _messages.add({'sender': 'them', 'text': response});
     });
   }
 
@@ -88,10 +113,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         bottomRight: Radius.circular(isMe ? 0 : 16),
                       ),
                     ),
-                    child: Text(
-                      msg['text']!,
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
-                    ),
+                    child: SMSText(msg['text'] ?? "", isMe),
                   ),
                 );
               },
@@ -123,7 +145,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 ),
                 const SizedBox(width: 8),
                 GestureDetector(
-                  onTap: _sendMessage,
+                  onTap: () {
+                    _sendMessage();
+                    if (widget.isEnabled) {
+                      _respondToMessage(context);
+                    }
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -139,5 +166,33 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         ],
       ),
     );
+  }
+
+  Widget SMSText(String text, bool isMe) {
+    if (isMe) {
+    return Text(
+      text,
+      style: const TextStyle(color: Colors.white, fontSize: 15),
+    );
+
+    }
+    else {
+      final markdownStyle = MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+        p: const TextStyle(fontSize: 16, color: Colors.white),
+        h1: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+        h2: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+        h3: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
+        h4: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+        h5: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+        h6: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
+        em: const TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
+        strong: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+        code: const TextStyle(fontFamily: 'monospace', backgroundColor: Color(0xFF333333), color: Colors.greenAccent),
+        blockquote: const TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
+        listBullet: const TextStyle(fontSize: 16, color: Colors.white),
+      );
+
+      return MarkdownBody(data: text, styleSheet: markdownStyle);
+    }
   }
 }

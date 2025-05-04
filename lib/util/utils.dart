@@ -3,8 +3,8 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 
-  Future<String> generateSummary(BuildContext context, String prompt) async {
-    var appstate = context.watch<MyAppState>(); // use read to avoid rebuild loops
+  Future<String> generateSummary(BuildContext context, String prompt, [bool listen = true]) async {
+    var appstate = context.read<MyAppState>(); // use read to avoid rebuild loops
     try {
       final content = [Content.multi([TextPart(prompt)])];
       var res = await appstate.model.generateContent(content);

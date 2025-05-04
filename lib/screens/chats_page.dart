@@ -66,9 +66,12 @@ class ChatsScreen extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 // Navigate to AI chat screen
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('AI Chat not implemented yet')),
-                );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ChatDetailScreen(name: 'AI Sports Expert - Powered by Gemini', isEnabled: true,),
+                    ),
+                  );
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -92,6 +95,7 @@ class ChatsScreen extends StatelessWidget {
                       ),
                     ),
                   ],
+                  
                 ),
               ),
             ),
@@ -121,7 +125,7 @@ class ChatsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ChatDetailScreen(name: chat['name']),
+                      builder: (_) => ChatDetailScreen(name: chat['name'], isEnabled: false),
                     ),
                   );
                 },
