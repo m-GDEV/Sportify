@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'find_players_screen.dart';
 import '../widgets/sport_card.dart';
 import '../widgets/leaderboard_card.dart';
+import 'filtered_game_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 10),
                 Image.asset(
                   'lib/assets/Sportify_logo.png',
-                  height: 40,
+                  height: 60,
                 ),
               ],
             ),
@@ -97,6 +98,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
+              const SizedBox(height: 12),
+              if (selectedSport != null)
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FilteredGamesScreen(selectedSport: selectedSport!),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: Colors.green[50],
+                        border: Border.all(color: Colors.green.shade100),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: const Text(
+                        'Find Games Near You',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+
+              
               LeaderboardCard(players: leaderboardData),
             ],
           ),

@@ -122,12 +122,17 @@ class _LeaderboardEntry extends StatelessWidget {
               ),
             ),
             Text(
-              '$score pts',
+              '$score ',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
+            ),
+            const Icon(
+              Icons.stars_rounded,
+              color: Colors.green,
+              size: 20,
             ),
           ],
         ),

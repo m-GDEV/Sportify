@@ -11,7 +11,7 @@ import 'screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'util/api_keys.dart';
+// import 'util/api_keys.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Sportify',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Outfit',
       ),
       home: const MainNavigation(),
     )
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: GEMINI_KEY);
+  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: 'tspmo');
 }
 
 class MainNavigation extends StatefulWidget {

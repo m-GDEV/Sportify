@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -45,7 +45,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 SizedBox(width: 10),
                 Text(
-                  'Player Profile',
+                  'My Profile',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
