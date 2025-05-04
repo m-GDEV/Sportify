@@ -68,6 +68,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
             title: Row(
               children: [
                 CircleAvatar(

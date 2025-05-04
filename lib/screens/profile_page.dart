@@ -31,6 +31,7 @@ class ProfilePage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
             centerTitle: false,
+            iconTheme: const IconThemeData(color: Colors.white),
             titleSpacing: 16,
             title: Text(
               externalPlayer ? 'My Profile' : '${user.name}\'s Profile',
