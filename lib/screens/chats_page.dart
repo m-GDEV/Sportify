@@ -69,7 +69,7 @@ class ChatsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ChatDetailScreen(name: 'AI Sports Expert - Powered by Gemini', isEnabled: true,),
+                      builder: (_) => ChatDetailScreen(name: 'Gemini AI Sports Expert', isEnabled: true,),
                     ),
                   );
               },
