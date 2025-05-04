@@ -71,17 +71,17 @@ class ProfilePage extends StatelessWidget {
             // Upcoming Matches
             Text("Upcoming Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
             SizedBox(height: 8),
-            _matchTile("Sat, May 4 • 5:00 PM", "Basketball • Community Center"),
-            _matchTile("Mon, May 6 • 6:30 PM", "Football • Sports Arena"),
+            _matchTile("Sat, May 4 • 5:00 PM", "Basketball • Community Center", "Basketball"),
+            _matchTile("Mon, May 6 • 6:30 PM", "Football • Sports Arena", "Football"),
 
+            // Recent Matches
             SizedBox(height: 24),
-
-            // Match History
             Text("Recent Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
             SizedBox(height: 8),
-            _matchTile("Apr 30", "🏆 Won • Football"),
-            _matchTile("Apr 28", "❌ Lost • Badminton"),
-            _matchTile("Apr 26", "🏆 Won • Basketball"),
+            _matchTile("Apr 30", "🏆 Won • Football", "Football"),
+            _matchTile("Apr 28", "❌ Lost • Badminton", "Badminton"),
+            _matchTile("Apr 26", "🏆 Won • Basketball", "Basketball"),
+
 
             SizedBox(height: 24),
 
@@ -123,14 +123,34 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _matchTile(String date, String description) {
+  Widget _matchTile(String date, String description, String sport) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(Icons.sports_soccer, color: Colors.green[700]),
+      leading: Icon(_getSportIcon(sport), color: Colors.green[700]),
       title: Text(description),
       subtitle: Text(date),
     );
   }
+
+  IconData _getSportIcon(String sport) {
+    switch (sport.toLowerCase()) {
+      case 'football':
+      case 'soccer':
+        return Icons.sports_soccer;
+      case 'basketball':
+        return Icons.sports_basketball;
+      case 'tennis':
+        return Icons.sports_tennis;
+      case 'badminton':
+        return Icons.sports_tennis; // placeholder (no specific icon)
+      case 'cricket':
+        return Icons.sports_cricket;
+      default:
+        return Icons.sports; // generic icon fallback
+    }
+  }
+
+
 
   Widget _friendChip(String name) {
     return Chip(

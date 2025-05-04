@@ -1,32 +1,74 @@
 import 'package:flutter/material.dart';
 
 class ReviewLocationsScreen extends StatelessWidget {
-  const ReviewLocationsScreen({Key? key}) : super(key: key);
+  final List<Map<String, dynamic>> locations = [
+    {
+      'name': 'City Sports Complex',
+      'image': 'https://harborsquare.com/wp-content/uploads/2021/12/full-court-basketball-indoors-near-me-edmonds-copy.jpg',
+      'courts': '3 outdoor, 1 indoor',
+      'rating': 4.5,
+      'distance': '1.2 km'
+    },
+    {
+      'name': 'West Park Field',
+      'image': 'https://luthernorse.com/images/2021/12/3/Soccer_Pitch_III.jpg',
+      'courts': '2 soccer fields',
+      'rating': 4.2,
+      'distance': '0.8 km'
+    },
+    {
+      'name': 'Arena 21',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6k55pclXE2vMHVxyiQ866WMGd93bpufMv_g&s',
+      'courts': '5 indoor courts',
+      'rating': 4.7,
+      'distance': '2.1 km'
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Review Locations'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 32),
-          const Text(
-        'Review Locations',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-          ListTile(
-        leading: const Icon(Icons.location_on),
-        title: const Text('City Sports Complex'),
-        subtitle: const Text('★★★★☆ 4.2'),
-        onTap: () {
-          // Navigate to location detail or map
+      appBar: AppBar(title: const Text('Nearby Locations')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: locations.length,
+        itemBuilder: (context, index) {
+          final location = locations[index];
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.green[50],
+              border: Border.all(color: Colors.green.shade100),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  child: Image.network(
+                    location['image'],
+                    height: 160,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(location['name'], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 6),
+                      Text('🏟️ Courts: ${location['courts']}'),
+                      Text('📍 ${location['distance']} • ⭐ ${location['rating']}'),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
         },
-          ),
-        ],
       ),
     );
   }
