@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sportify/main.dart';
+import 'package:sportify/screens/create_account_screen.dart';
 import 'package:sportify/screens/home_screen.dart';
 import 'package:sportify/util/AuthService.dart';
 
@@ -77,19 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
             ],),
+            Column(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
-              child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.purple],
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.green,
                   shadowColor: Colors.transparent,
+                  foregroundColor: Colors.white,
                 ),
                 onPressed: () async{
                   final res = await AuthService.login(email: email, password: password);
@@ -113,10 +109,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   }
                 },
-                child: Text('Submit', style: TextStyle(fontSize: 48, color: Colors.white), 
+                child: Text('Submit', style: TextStyle(fontSize: 36, color: Colors.white), 
               )),
-                        ),
-            )
+            ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => CreateAccountScreen()));
+                    },
+                    child: Text(
+                      'Don\'t have an account? Create an account!',
+                      style: TextStyle(fontSize: 24, color: Colors.green),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                    ),
+                  ),
+                )
+
+            ],)
           ],
         ),
       ),
