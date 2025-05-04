@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "588035456912",
+    "firebase_url": "https://gdsc-hacks2025-default-rtdb.firebaseio.com",
+    "project_id": "gdsc-hacks2025",
+    "storage_bucket": "gdsc-hacks2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588035456912:android:2113194b43c40df7013d15",
+        "android_client_info": {
+          "package_name": "com.example.sportify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhAWiRpw6eCfFurzIM3sOwa0nITrjprpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

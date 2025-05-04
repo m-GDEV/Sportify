@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/player_page.dart';
 
 class LeaderboardCard extends StatelessWidget {
   final List<Map<String, dynamic>> players;
@@ -46,28 +47,14 @@ class _LeaderboardEntry extends StatelessWidget {
   Widget _medalIcon(int rank) {
     switch (rank) {
       case 1:
-        return const Icon(Icons.emoji_events, size: 36, color: Color.fromARGB(255, 255, 213, 0));
+        return const Icon(Icons.emoji_events, color: Color(0xFFFFD700), size: 32);
       case 2:
-        return const Padding(
-          padding: EdgeInsets.only(left: 4.0), // reduce from 8 or more
-          child: Icon(
-            Icons.emoji_events,
-            size: 32,
-            color: Color(0xFFC0C0C0), // gold
-          ),
-        );
+        return const Icon(Icons.emoji_events, color: Color(0xFFC0C0C0), size: 32);
       case 3:
-        return const Padding(
-          padding: EdgeInsets.only(left: 4.0), // reduce from 8 or more
-          child: Icon(
-            Icons.emoji_events,
-            size: 32,
-            color: Color(0xFFCD7F32), // gold
-          ),
-        );
+        return const Icon(Icons.emoji_events, color: Color(0xFFCD7F32), size: 32);
       default:
         return Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: EdgeInsets.only(left: rank == 10 ? 0 : 4),
           child: Icon(Icons.circle, size: 8, color: Colors.grey[400]),
         );
     }
@@ -77,61 +64,74 @@ class _LeaderboardEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool showRankNumber = rank > 3;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.green[50],
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.green.shade100),
-      ),
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      child: Row(
-        children: [
-          showRankNumber
-              ? Text(
-                  '  #$rank ',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                )
-              : _medalIcon(rank),
-          const SizedBox(width: 4),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  'Top Sport: $sport',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey[700],
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlayerPage(
+              name: name,
+              sport: sport,
+              score: score,
             ),
           ),
-          Text(
-            '$score ',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.green[50],
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.green.shade100),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Row(
+          children: [
+            showRankNumber
+                ? Padding(
+                    padding: EdgeInsets.only(left: rank == 10 ? 0 : 4),
+                    child: Text(
+                      '#$rank',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
+                : _medalIcon(rank),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    sport,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-
-          Icon(Icons.stars, color: Colors.green[900], size: 20),
-        ],
+            Text(
+              '$score pts',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
