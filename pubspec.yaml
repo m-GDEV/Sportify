@@ -63,6 +63,7 @@ dev_dependencies:
 flutter:
   assets: 
     - lib/assets/Sportify_logo.png
+    - lib/assets/profile-pic.jpg
 
 
   fonts:
