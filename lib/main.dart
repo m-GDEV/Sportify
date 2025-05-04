@@ -12,6 +12,7 @@ import 'screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'screens/chats_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,6 +69,7 @@ class _MainNavigationState extends State<MainNavigation> {
     GamesScreen(),
     ReviewLocationsScreen(),
     ProfilePage(externalPlayer: false,),
+    ChatsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -94,6 +96,7 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'Games'),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Locations'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
         ],
       );
     }
