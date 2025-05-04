@@ -44,11 +44,12 @@ class ReviewLocationsScreen extends StatelessWidget {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            centerTitle: true,
+            automaticallyImplyLeading: false,
+            centerTitle: false, // left-aligns title
+            titleSpacing: 16,   // pushes it from the left
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: const [
-                Text("📍", style: TextStyle(fontSize: 26)),
                 SizedBox(width: 10),
                 Text(
                   'Nearby Locations',

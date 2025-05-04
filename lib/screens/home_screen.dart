@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("🏅", style: TextStyle(fontSize: 26)),
                 const SizedBox(width: 10),
                 Image.asset(
                   'lib/assets/Sportify_logo.png',

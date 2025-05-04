@@ -4,9 +4,38 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Player Profile'),
-        backgroundColor: Colors.green[700],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFA8E6A2),
+                Color(0xFF6FCF97),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            titleSpacing: 16,
+            title: Row(
+              children: const [
+                SizedBox(width: 10),
+                Text(
+                  'Player Profile',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -82,7 +111,6 @@ class ProfilePage extends StatelessWidget {
             _matchTile("Apr 28", "❌ Lost • Badminton", "Badminton"),
             _matchTile("Apr 26", "🏆 Won • Basketball", "Basketball"),
 
-
             SizedBox(height: 24),
 
             // Friends
@@ -142,15 +170,13 @@ class ProfilePage extends StatelessWidget {
       case 'tennis':
         return Icons.sports_tennis;
       case 'badminton':
-        return Icons.sports_tennis; // placeholder (no specific icon)
+        return Icons.sports_tennis; // placeholder
       case 'cricket':
         return Icons.sports_cricket;
       default:
-        return Icons.sports; // generic icon fallback
+        return Icons.sports;
     }
   }
-
-
 
   Widget _friendChip(String name) {
     return Chip(
