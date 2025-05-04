@@ -32,8 +32,8 @@ class ProfilePage extends StatelessWidget {
             elevation: 0,
             centerTitle: false,
             titleSpacing: 16,
-            title: const Text(
-              'My Profile',
+            title: Text(
+              externalPlayer ? 'My Profile' : '${user.name}\'s Profile',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,

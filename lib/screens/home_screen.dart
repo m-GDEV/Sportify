@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Hey Milind,\n what would you like to play today?',
+                'Hey Milind,\nwhat would you like to play today?',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
