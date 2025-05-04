@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:sportify/screens/create_account_screen.dart';
 import 'package:sportify/screens/login_screen.dart';
 import 'screens/home_screen.dart';
@@ -9,6 +10,7 @@ import 'screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'util/api_keys.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,10 @@ class MyApp extends StatelessWidget {
       home: const MainNavigation(),
     );
   }
+}
+
+class MyAppState extends ChangeNotifier {
+  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: GEMINI_KEY);
 }
 
 class MainNavigation extends StatefulWidget {

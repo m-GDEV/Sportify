@@ -1,107 +1,83 @@
 import 'package:flutter/material.dart';
+import '../util/data_classes.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Player Profile'),
-        backgroundColor: Colors.green[700],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Picture + Basic Info
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  radius: 45,
-                  backgroundImage: AssetImage('assets/profile_pic.png'), // replace with real image
+Widget build(BuildContext context) {
+  final user = dummyUser;
+
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Player Profile'),
+      backgroundColor: Colors.green[700],
+    ),
+    body: SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Profile Info
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: 45,
+                foregroundImage: AssetImage('profile-pic.jpg'),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(user.name, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 4),
+                    Text(user.location, style: TextStyle(color: Colors.grey[700])),
+                    SizedBox(height: 4),
+                    Text("⚽ 🏀 🏸 Preferred Sports: ${user.preferredSports.join(', ')}", style: TextStyle(fontSize: 13)),
+                  ],
                 ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("John Doe", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 4),
-                      Text("Toronto, ON", style: TextStyle(color: Colors.grey[700])),
-                      SizedBox(height: 4),
-                      Text("⚽ 🏀 🏸 Preferred Sports: Football, Basketball, Badminton", style: TextStyle(fontSize: 13)),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+            ],
+          ),
 
-            SizedBox(height: 16),
+          SizedBox(height: 16),
 
-            // Bio
-            Text("About Me", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 6),
-            Text(
-              "Passionate about sports and always up for a match. Looking for partners to play ranked or casual games regularly.",
-              style: TextStyle(color: Colors.grey[800]),
-            ),
+          Text("About Me", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          SizedBox(height: 6),
+          Text(user.bio, style: TextStyle(color: Colors.grey[800])),
 
-            SizedBox(height: 20),
+          SizedBox(height: 20),
+          Text("Game Stats", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          SizedBox(height: 12),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: user.stats.entries.map((e) => _statCard(e.key, e.value)).toList(),
+          ),
 
-            // Stats Grid
-            Text("Game Stats", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 12),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                _statCard("Total Matches", "58"),
-                _statCard("Ranked", "35"),
-                _statCard("Casual", "23"),
-                _statCard("Win/Loss", "34 / 24"),
-                _statCard("Current Rank", "Gold II"),
-                _statCard("Most Played", "Football"),
-                _statCard("Last Match", "Apr 30 • Won"),
-              ],
-            ),
+          SizedBox(height: 24),
+          Text("Upcoming Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          SizedBox(height: 8),
+          ...user.upcomingMatches.map((m) => _matchTile(m.date, m.description, m.sport)),
 
-            SizedBox(height: 24),
+          SizedBox(height: 24),
+          Text("Recent Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          SizedBox(height: 8),
+          ...user.recentMatches.map((m) => _matchTile(m.date, m.description, m.sport)),
 
-            // Upcoming Matches
-            Text("Upcoming Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 8),
-            _matchTile("Sat, May 4 • 5:00 PM", "Basketball • Community Center", "Basketball"),
-            _matchTile("Mon, May 6 • 6:30 PM", "Football • Sports Arena", "Football"),
-
-            // Recent Matches
-            SizedBox(height: 24),
-            Text("Recent Matches", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 8),
-            _matchTile("Apr 30", "🏆 Won • Football", "Football"),
-            _matchTile("Apr 28", "❌ Lost • Badminton", "Badminton"),
-            _matchTile("Apr 26", "🏆 Won • Basketball", "Basketball"),
-
-
-            SizedBox(height: 24),
-
-            // Friends
-            Text("Connections", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              children: [
-                _friendChip("Alice"),
-                _friendChip("Bob"),
-                _friendChip("Charlie"),
-                _friendChip("Zara"),
-              ],
-            ),
-          ],
-        ),
+          SizedBox(height: 24),
+          Text("Connections", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            children: user.friends.map((name) => _friendChip(name)).toList(),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   Widget _statCard(String title, String value) {
     return Container(
