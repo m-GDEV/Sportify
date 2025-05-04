@@ -56,7 +56,7 @@ class MatchInfo {
 }
 
 final dummyUser = User(
-  name: "Your are my sunshine",
+  name: "Le Goat James",
   location: "Toronto, ON",
   profileImagePath: "profile_pic.jpg",
   bio: "Passionate about sports and always up for a match. Looking for partners to play ranked or casual games regularly.",
