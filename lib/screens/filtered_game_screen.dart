@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-class GamesScreen extends StatelessWidget {
+class FilteredGamesScreen extends StatelessWidget {
+  final String selectedSport;
+
+  FilteredGamesScreen({Key? key, required this.selectedSport}) : super(key: key);
+
 
   final List<Map<String, dynamic>> nearbyGames = [
     {
@@ -27,114 +31,53 @@ class GamesScreen extends StatelessWidget {
       'rsvpLimit': 10,
       'rsvps': ['Arjun', 'Leila', 'Marcus', 'Nina', 'Leo', 'Aryan']
     },
-    {
-      'sport': 'Badminton',
-      'time': '4:45 PM',
-      'location': 'Sunrise Gymnasium',
-      'distance': '1.7 km',
-      'rsvpLimit': 4,
-      'rsvps': ['Nina', 'Raj', 'Meera']
-    },
-    {
-      'sport': 'Cricket',
-      'time': '2:00 PM',
-      'location': 'Greenfield Park',
-      'distance': '2.6 km',
-      'rsvpLimit': 11,
-      'rsvps': ['Dev', 'Aryan', 'Anika', 'Farhan', 'Yusuf']
-    },
-    {
-      'sport': 'Volleyball',
-      'time': '7:00 PM',
-      'location': 'Beachside Court',
-      'distance': '0.9 km',
-      'rsvpLimit': 6,
-      'rsvps': ['Sara', 'Tanya', 'Ishaan']
-    },
-    {
-      'sport': 'Table Tennis',
-      'time': '5:30 PM',
-      'location': 'Downtown Rec Center',
-      'distance': '1.0 km',
-      'rsvpLimit': 4,
-      'rsvps': ['Leo', 'Zara', 'Kunal', 'Manav']
-    },
+    // ... Add more if needed
   ];
 
   @override
-Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
+    final filtered = nearbyGames
+        .where((game) => game['sport'].toLowerCase() == selectedSport.toLowerCase())
+        .toList();
 
-  return Scaffold(
-        appBar: PreferredSize(
-  preferredSize: const Size.fromHeight(kToolbarHeight),
-  child: Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color(0xFFA8E6A2), // light green
-          Color(0xFF6FCF97), // soft medium green
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Nearby $selectedSport Games'),
+        backgroundColor: Colors.green[700],
       ),
-    ),
-    child: AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      centerTitle: false, // left-aligns title
-      titleSpacing: 16,   // pushes it from the left
-      title: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          SizedBox(width: 10),
-          Text(
-            'Games Near Me',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22, // larger text
-              color: Colors.black, // clean black
-              letterSpacing: 0.7,
-            ),
-          ),
-        ],
-      ),
-    ),
-  ),
-),
-
-
-      body: ListView.builder(
-        itemCount: nearbyGames.length,
-        itemBuilder: (context, index) {
-          final game = nearbyGames[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.green[50],
-              border: Border.all(color: Colors.green.shade100),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ListTile(
-              title: Text(
-                '${game['sport']} • ${game['time']}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text('${game['location']} • ${game['distance']}'),
-              trailing: Text('${game['rsvps'].length}/${game['rsvpLimit']}'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => GameDetailScreen(game: game),
+      body: filtered.isEmpty
+          ? const Center(child: Text('No games found for this sport.'))
+          : ListView.builder(
+              itemCount: filtered.length,
+              itemBuilder: (context, index) {
+                final game = filtered[index];
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.green[50],
+                    border: Border.all(color: Colors.green.shade100),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      '${game['sport']} • ${game['time']}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('${game['location']} • ${game['distance']}'),
+                    trailing: Text('${game['rsvps'].length}/${game['rsvpLimit']}'),
+                    onTap: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => GameDetailScreen(game: game),
+                      ),
+                    );
+                    },
                   ),
                 );
               },
             ),
-          );
-        },
-      ),
     );
   }
 }
@@ -222,7 +165,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                 ),
               ),
             ),
-          )
+          ),
 
           ],
         ),

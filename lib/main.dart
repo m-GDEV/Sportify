@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Sportify',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Outfit',
       ),
       home: const MainNavigation(),
     );

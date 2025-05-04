@@ -15,9 +15,35 @@ class PlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Player Profile'),
-        backgroundColor: Colors.green[700],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFFA8E6A2), Color(0xFF6FCF97)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            titleSpacing: 16,
+            title: Row(
+              children: const [
+                SizedBox(width: 10),
+                Text(
+                  'Player Profile',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -30,7 +56,7 @@ class PlayerPage extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 45,
-                  backgroundImage: AssetImage('assets/profile_pic.png'), // Placeholder image
+                  backgroundImage: AssetImage('assets/profile_pic.png'),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -60,7 +86,7 @@ class PlayerPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Game Stats (fake/sample values)
+            // Game Stats (sample values)
             const Text("Game Stats", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             Wrap(

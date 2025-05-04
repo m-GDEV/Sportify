@@ -27,7 +27,7 @@ class ProfilePage extends StatelessWidget {
               children: const [
                 SizedBox(width: 10),
                 Text(
-                  'Player Profile',
+                  'My Profile',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
