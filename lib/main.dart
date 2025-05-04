@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sportify/screens/create_account_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/find_players_screen.dart';
 import 'screens/review_locations_screen.dart';
 import 'screens/players_screen.dart';
 import 'screens/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -17,17 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sportify',
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFFF8F4FA), // light pastel
-        primaryColor: Color(0xFF388E3C),            // green
-        appBarTheme: AppBarTheme(
-          color: Color(0xFF388E3C),
-          iconTheme: IconThemeData(color: Colors.white),
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        textTheme: TextTheme(
-          bodyMedium: TextStyle(color: Colors.black87),
-          titleLarge: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        primarySwatch: Colors.blue,
       ),
       home: const MainNavigation(),
     );
@@ -45,6 +43,7 @@ class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
+    CreateAccountScreen(),
     HomeScreen(),
     PlayersScreen(),
     ReviewLocationsScreen(),
