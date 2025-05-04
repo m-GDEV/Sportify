@@ -12,10 +12,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
   String? selectedSport;
-  late AnimationController _fadeController;
-  late Animation<double> _fadeAnimation;
 
   final List<Map<String, dynamic>> sports = [
     {'name': 'Soccer', 'icon': Icons.sports_soccer},
@@ -117,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
               ),
               const SizedBox(height: 20),
-              const SizedBox(height: 12),
               if (selectedSport != null)
                 Center(
                   child: GestureDetector(
@@ -151,30 +148,23 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
               const SizedBox(height: 24),
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Leaderboard',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // updated
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    LeaderboardCard(players: leaderboardUsers),
-                  ],
+              const Text(
+                'Leaderboard',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
+              const SizedBox(height: 8),
+              LeaderboardCard(players: leaderboardUsers),
             ],
           ),
         ),
       ),
     );
   }
+
 
   final List<User> leaderboardUsers = [
   User(
