@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class GamesScreen extends StatelessWidget {
-
   final List<Map<String, dynamic>> nearbyGames = [
     {
       'sport': 'Basketball',
@@ -62,48 +61,36 @@ class GamesScreen extends StatelessWidget {
   ];
 
   @override
-Widget build(BuildContext context) {  
-
-  return Scaffold(
-        appBar: PreferredSize(
-  preferredSize: const Size.fromHeight(kToolbarHeight),
-  child: Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          Color(0xFFA8E6A2), // light green
-          Color(0xFF6FCF97), // soft medium green
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
-    ),
-    child: AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      centerTitle: false, // left-aligns title
-      titleSpacing: 16,   // pushes it from the left
-      title: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          SizedBox(width: 10),
-          Text(
-            'Games Near Me',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22, // larger text
-              color: Colors.black, // clean black
-              letterSpacing: 0.7,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1B5E20), Colors.black],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
-        ],
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: false,
+            titleSpacing: 16,
+            title: const Text(
+              'Games Near Me',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Colors.white,
+                letterSpacing: 0.7,
+              ),
+            ),
+          ),
+        ),
       ),
-    ),
-  ),
-),
-
-
       body: ListView.builder(
         itemCount: nearbyGames.length,
         itemBuilder: (context, index) {
@@ -112,17 +99,33 @@ Widget build(BuildContext context) {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.green[50],
-              border: Border.all(color: Colors.green.shade100),
+              color: Colors.grey[850],
+              border: Border.all(color: Colors.green.shade800),
               borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.greenAccent.withOpacity(0.2),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                )
+              ],
             ),
             child: ListTile(
               title: Text(
                 '${game['sport']} • ${game['time']}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.greenAccent,
+                ),
               ),
-              subtitle: Text('${game['location']} • ${game['distance']}'),
-              trailing: Text('${game['rsvps'].length}/${game['rsvpLimit']}'),
+              subtitle: Text(
+                '${game['location']} • ${game['distance']}',
+                style: const TextStyle(color: Colors.white),
+              ),
+              trailing: Text(
+                '${game['rsvps'].length}/${game['rsvpLimit']}',
+                style: const TextStyle(color: Colors.white),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -175,18 +178,24 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
     final isFull = rsvps.length >= game['rsvpLimit'];
 
     return Scaffold(
-      appBar: AppBar(title: Text('${game['sport']} Game')),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text('${game['sport']} Game'),
+        backgroundColor: Colors.green[900],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('🕒 ${game['time']}', style: const TextStyle(fontSize: 16)),
-            Text('📍 ${game['location']}', style: const TextStyle(fontSize: 16)),
-            Text('📏 ${game['distance']}', style: const TextStyle(fontSize: 16)),
+            Text('🕒 ${game['time']}', style: const TextStyle(color: Colors.white, fontSize: 16)),
+            Text('📍 ${game['location']}', style: const TextStyle(color: Colors.white, fontSize: 16)),
+            Text('📏 ${game['distance']}', style: const TextStyle(color: Colors.white, fontSize: 16)),
             const SizedBox(height: 20),
-            Text('Players Attending (${rsvps.length}/${game['rsvpLimit']})',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              'Players Attending (${rsvps.length}/${game['rsvpLimit']})',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            ),
             const SizedBox(height: 10),
             Wrap(
               spacing: 8,
@@ -195,35 +204,35 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                   .map((name) => Chip(
                         avatar: CircleAvatar(child: Text(name[0])),
                         label: Text(name),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: Colors.grey[850],
+                        labelStyle: const TextStyle(color: Colors.white),
                       ))
                   .toList(),
             ),
             const Spacer(),
             Center(
-            child: GestureDetector(
-              onTap: isFull ? null : _handleRSVP,
-              child: Container(
-                margin: const EdgeInsets.only(top: 0),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.green[50],
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.green[100]!),
-                ),
-                child: Text(
-                  isFull ? 'Full' : 'RSVP to this Game',
-                  style: TextStyle(
-                    color: Colors.green[800],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    letterSpacing: 0.5,
+              child: GestureDetector(
+                onTap: isFull ? null : _handleRSVP,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[850],
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.green[300]!),
+                  ),
+                  child: Text(
+                    isFull ? 'Full' : 'RSVP to this Game',
+                    style: const TextStyle(
+                      color: Colors.greenAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      letterSpacing: 0.5,
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-
+            )
           ],
         ),
       ),

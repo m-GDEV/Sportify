@@ -24,12 +24,17 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Column(children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 32, 0, 40),
+              padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
               child: Text(
-                "Welcome to Sportify!",
+                "Welcome to ",
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
+              
             ),
+            Image.asset(
+                  'lib/assets/Sportify_logo.png',
+                  height: 90,
+                ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: Text(
