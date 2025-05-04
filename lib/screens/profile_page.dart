@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight + 12),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -30,19 +30,16 @@ class ProfilePage extends StatelessWidget {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            centerTitle: false,
             titleSpacing: 16,
-            title: const Row(
-              children: [
-                SizedBox(width: 10),
-                Text(
-                  'My Profile',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            title: const Text(
+              'My Profile',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Colors.white,
+                letterSpacing: 0.7,
+              ),
             ),
           ),
         ),
@@ -102,6 +99,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
+              runSpacing: 8,
               children: user.friends.map((name) => _friendChip(name)).toList(),
             ),
           ],
@@ -113,9 +111,7 @@ class ProfilePage extends StatelessWidget {
   Widget _statCard(String title, String value, [double width = 160, bool markdown = false]) {
     Widget content;
     if (markdown) {
-      content = MarkdownBody(data: value, styleSheet: MarkdownStyleSheet(
-        p: const TextStyle(color: Colors.white, fontSize: 14),
-      ));
+      content = MarkdownBody(data: value, styleSheet: MarkdownStyleSheet(p: const TextStyle(color: Colors.white, fontSize: 14)));
     } else {
       content = Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white));
     }
@@ -124,28 +120,42 @@ class ProfilePage extends StatelessWidget {
       width: width != 160 ? double.infinity : width,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey[900],  // darker bubble
+        borderRadius: BorderRadius.circular(16),
+        color: const Color(0xFF1E1E1E),
         border: Border.all(color: Colors.green.shade300),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.greenAccent.withOpacity(0.2),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const TextStyle(fontSize: 13, color: Colors.greenAccent)),
           const SizedBox(height: 4),
-          content
+          content,
         ],
       ),
     );
   }
 
   Widget _matchTile(String date, String description, String sport) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(_getSportIcon(sport), color: Colors.greenAccent),
-      title: Text(description, style: const TextStyle(color: Colors.white)),
-      subtitle: Text(date, style: const TextStyle(color: Colors.grey)),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E1E1E),
+        border: Border.all(color: Colors.green.shade300),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListTile(
+        leading: Icon(_getSportIcon(sport), color: Colors.greenAccent),
+        title: Text(description, style: const TextStyle(color: Colors.white)),
+        subtitle: Text(date, style: const TextStyle(color: Colors.grey)),
+      ),
     );
   }
 
@@ -157,7 +167,6 @@ class ProfilePage extends StatelessWidget {
       case 'basketball':
         return Icons.sports_basketball;
       case 'tennis':
-        return Icons.sports_tennis;
       case 'badminton':
         return Icons.sports_tennis;
       case 'cricket':
@@ -174,7 +183,8 @@ class ProfilePage extends StatelessWidget {
         child: Text(name[0], style: const TextStyle(color: Colors.white)),
       ),
       label: Text(name, style: const TextStyle(color: Colors.white)),
-      backgroundColor: Colors.grey[900],  // darker bubble
+      backgroundColor: const Color(0xFF1E1E1E),
+      shape: StadiumBorder(side: BorderSide(color: Colors.green.shade300)),
     );
   }
 
@@ -208,7 +218,7 @@ class ProfilePage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
-            child: CircularProgressIndicator(),
+            child: Center(child: CircularProgressIndicator(color: Colors.greenAccent)),
           );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.redAccent));

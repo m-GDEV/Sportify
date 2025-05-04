@@ -18,128 +18,149 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
-              child: Text(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
                 "Welcome to ",
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-              ),
-              
-            ),
-            Image.asset(
-                  'lib/assets/Sportify_logo.png',
-                  height: 90,
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.greenAccent,
                 ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-              child: Text(
-                "Please login to get started",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
+              const SizedBox(height: 8),
+              Image.asset(
+                'lib/assets/Sportify_logo.png',
+                height: 90,
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                "Please login to get started",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              // Email field
+              SizedBox(
                 width: 500,
                 child: TextField(
-                  autofillHints: [AutofillHints.email],
-                  onChanged: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                    print(email);
-                  },
+                  autofillHints: const [AutofillHints.email],
+                  style: const TextStyle(color: Colors.white),
+                  onChanged: (value) => setState(() => email = value),
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    hintText: 'Please enter a valid email',
-                    border: OutlineInputBorder(),
+                    labelStyle: const TextStyle(color: Colors.greenAccent),
+                    hintText: 'Enter your email',
+                    hintStyle: TextStyle(color: Colors.grey[500]),
+                    filled: true,
+                    fillColor: Colors.grey[900],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.green),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.greenAccent),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
+              const SizedBox(height: 16),
+
+              // Password field
+              SizedBox(
                 width: 500,
                 child: TextField(
-                  onChanged:
-                      (value) => setState(() {
-                        password = value;
-                      }),
+                  onChanged: (value) => setState(() => password = value),
                   obscureText: true,
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    hintText:
-                        'Enter the password you used to sign up',
-                    border: OutlineInputBorder(),
+                    labelStyle: const TextStyle(color: Colors.greenAccent),
+                    hintText: 'Enter your password',
+                    hintStyle: TextStyle(color: Colors.grey[500]),
+                    filled: true,
+                    fillColor: Colors.grey[900],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.green),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.greenAccent),
+                    ),
                   ),
                 ),
               ),
-            ),
+              const SizedBox(height: 32),
 
-            ],),
-            Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  shadowColor: Colors.transparent,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () async{
-                  final res = await AuthService.login(email: email, password: password);
-
-                  if (res!.contains('Success')) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigation()));
-                  }
-                  else {
-                    showDialog<String> (context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Error logging in account'),
-                        content: Text(res),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    });
-                  }
-                },
-                child: Text('Submit', style: TextStyle(fontSize: 36, color: Colors.white), 
-              )),
-            ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => CreateAccountScreen()));
-                    },
-                    child: Text(
-                      'Don\'t have an account? Create an account!',
-                      style: TextStyle(fontSize: 24, color: Colors.green),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                    ),
+              // Submit button
+              SizedBox(
+                width: 500,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                )
+                  onPressed: () async {
+                    final res = await AuthService.login(email: email, password: password);
 
-            ],)
-          ],
+                    if (res!.contains('Success')) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const MainNavigation(),
+                      ));
+                    } else {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error logging in'),
+                            content: Text(res),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Create account button
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => CreateAccountScreen()),
+                  );
+                },
+                child: const Text(
+                  "Don't have an account? Create one!",
+                  style: TextStyle(color: Colors.greenAccent, fontSize: 18),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
