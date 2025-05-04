@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GamesScreen extends StatelessWidget {
+
   final List<Map<String, dynamic>> nearbyGames = [
     {
       'sport': 'Basketball',
@@ -61,8 +62,9 @@ class GamesScreen extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {  
+
+  return Scaffold(
         appBar: PreferredSize(
   preferredSize: const Size.fromHeight(kToolbarHeight + 12),
   child: Container(
