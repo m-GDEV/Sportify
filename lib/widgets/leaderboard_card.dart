@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sportify/screens/profile_page.dart';
 import '../screens/player_page.dart';
+import '../util/data_classes.dart';
 
 class LeaderboardCard extends StatelessWidget {
-  final List<Map<String, dynamic>> players;
+  final List<User> players;
 
   const LeaderboardCard({super.key, required this.players});
 
@@ -20,10 +22,8 @@ class LeaderboardCard extends StatelessWidget {
           final index = entry.key;
           final player = entry.value;
           return _LeaderboardEntry(
+            player: player,
             rank: index + 1,
-            name: player['name'],
-            score: player['score'],
-            sport: player['sport'],
           );
         }).toList(),
       ],
@@ -32,16 +32,12 @@ class LeaderboardCard extends StatelessWidget {
 }
 
 class _LeaderboardEntry extends StatelessWidget {
+  final User player;
   final int rank;
-  final String name;
-  final int score;
-  final String sport;
 
   const _LeaderboardEntry({
+    required this.player,
     required this.rank,
-    required this.name,
-    required this.score,
-    required this.sport,
   });
 
   Widget _medalIcon(int rank) {
@@ -69,10 +65,8 @@ class _LeaderboardEntry extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlayerPage(
-              name: name,
-              sport: sport,
-              score: score,
+            builder: (context) => ProfilePage(
+              player: player, externalPlayer: true,
             ),
           ),
         );
@@ -105,14 +99,14 @@ class _LeaderboardEntry extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    player.name,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                   Text(
-                    sport,
+                    player.preferredSports[0],
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey[700],
@@ -122,7 +116,7 @@ class _LeaderboardEntry extends StatelessWidget {
               ),
             ),
             Text(
-              '$score ',
+              '${player.score} ',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

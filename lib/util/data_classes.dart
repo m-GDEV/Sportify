@@ -8,6 +8,7 @@ class User {
   final List<MatchInfo> upcomingMatches;
   final List<MatchInfo> recentMatches;
   final List<String> friends;
+  final int score; // Placeholder for score, can be updated later
 
   User({
     required this.name,
@@ -19,6 +20,7 @@ class User {
     required this.upcomingMatches,
     required this.recentMatches,
     required this.friends,
+    required this.score,
   });
 
   @override
@@ -42,6 +44,9 @@ class User {
 
   Connections:
   ${friends.join(', ')}
+
+  Total Score: 
+  ${score} points across all sports
   ''';
   }
 
@@ -80,4 +85,5 @@ final dummyUser = User(
     MatchInfo(date: "Apr 26", description: "🏆 Won • Basketball", sport: "Basketball"),
   ],
   friends: ["Alice", "Bob", "Charlie", "Zara"],
+  score: 1200
 );

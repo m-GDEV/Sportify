@@ -3,6 +3,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
 import 'package:sportify/screens/create_account_screen.dart';
 import 'package:sportify/screens/login_screen.dart';
+import 'package:sportify/util/api_keys.dart';
 import 'screens/home_screen.dart';
 import 'screens/find_players_screen.dart';
 import 'screens/review_locations_screen.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: 'tspmo');
+  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: GEMINI_KEY);
 }
 
 class MainNavigation extends StatefulWidget {
@@ -57,7 +58,7 @@ class _MainNavigationState extends State<MainNavigation> {
     HomeScreen(),
     GamesScreen(),
     ReviewLocationsScreen(),
-    ProfilePage(),
+    ProfilePage(externalPlayer: false,),
   ];
 
   void _onItemTapped(int index) {

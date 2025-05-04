@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sportify/util/data_classes.dart';
 import 'find_players_screen.dart';
 import '../widgets/sport_card.dart';
 import '../widgets/leaderboard_card.dart';
@@ -20,19 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     {'name': 'Tennis', 'icon': Icons.sports_tennis},
     {'name': 'Cricket', 'icon': Icons.sports_cricket},
     {'name': 'More', 'icon': Icons.more_horiz},
-  ];
-
-  final leaderboardData = [
-    {'name': 'Amit', 'score': 1200, 'sport': 'Soccer'},
-    {'name': 'Leila', 'score': 1100, 'sport': 'Tennis'},
-    {'name': 'Zara', 'score': 1050, 'sport': 'Basketball'},
-    {'name': 'Khalid', 'score': 980, 'sport': 'Soccer'},
-    {'name': 'Farah', 'score': 940, 'sport': 'Cricket'},
-    {'name': 'Ravi', 'score': 910, 'sport': 'Basketball'},
-    {'name': 'Sara', 'score': 890, 'sport': 'Tennis'},
-    {'name': 'John', 'score': 870, 'sport': 'Football'},
-    {'name': 'Tina', 'score': 850, 'sport': 'Badminton'},
-    {'name': 'Ali', 'score': 820, 'sport': 'Volleyball'},
   ];
 
   @override
@@ -133,11 +121,241 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
               
-              LeaderboardCard(players: leaderboardData),
+              LeaderboardCard(players: leaderboardUsers),
             ],
           ),
         ),
       ),
     );
   }
+
+  final List<User> leaderboardUsers = [
+  User(
+    name: 'Amit',
+    location: 'Toronto, ON',
+    profileImagePath: 'assets/amit.png',
+    bio: 'Enthusiastic soccer player who loves team games and weekly leagues.',
+    preferredSports: ['Soccer'],
+    stats: {
+      'Total Matches': '85',
+      'Ranked': '60',
+      'Casual': '25',
+      'Win/Loss': '50 / 35',
+      'Current Rank': 'Platinum I',
+      'Most Played': 'Soccer',
+      'Last Match': 'May 1 • Won',
+    },
+    upcomingMatches: [
+      MatchInfo(date: 'May 5 • 6:00 PM', description: 'Soccer • High Park', sport: 'Soccer'),
+    ],
+    recentMatches: [
+      MatchInfo(date: 'May 1', description: '🏆 Won • Soccer', sport: 'Soccer'),
+    ],
+    friends: ['Zara', 'Khalid'],
+    score: 1200,
+  ),
+  User(
+    name: 'Leila',
+    location: 'Vancouver, BC',
+    profileImagePath: 'assets/leila.png',
+    bio: 'Loves fast-paced tennis matches and practicing volleys.',
+    preferredSports: ['Tennis'],
+    stats: {
+      'Total Matches': '70',
+      'Ranked': '50',
+      'Casual': '20',
+      'Win/Loss': '40 / 30',
+      'Current Rank': 'Gold II',
+      'Most Played': 'Tennis',
+      'Last Match': 'May 2 • Lost',
+    },
+    upcomingMatches: [
+      MatchInfo(date: 'May 6 • 7:00 PM', description: 'Tennis • Riverdale Courts', sport: 'Tennis'),
+    ],
+    recentMatches: [
+      MatchInfo(date: 'May 2', description: '❌ Lost • Tennis', sport: 'Tennis'),
+    ],
+    friends: ['Farah', 'Sara'],
+    score: 1100,
+  ),
+  User(
+    name: 'Zara',
+    location: 'Calgary, AB',
+    profileImagePath: 'assets/zara.png',
+    bio: 'Basketball lover and team captain with sharp shooting skills.',
+    preferredSports: ['Basketball'],
+    stats: {
+      'Total Matches': '90',
+      'Ranked': '55',
+      'Casual': '35',
+      'Win/Loss': '48 / 42',
+      'Current Rank': 'Diamond',
+      'Most Played': 'Basketball',
+      'Last Match': 'Apr 30 • Won',
+    },
+    upcomingMatches: [
+      MatchInfo(date: 'May 4 • 5:00 PM', description: 'Basketball • YMCA Gym', sport: 'Basketball'),
+    ],
+    recentMatches: [
+      MatchInfo(date: 'Apr 30', description: '🏆 Won • Basketball', sport: 'Basketball'),
+    ],
+    friends: ['Amit', 'John'],
+    score: 1050,
+  ),
+  User(
+    name: 'Khalid',
+    location: 'Ottawa, ON',
+    profileImagePath: 'assets/khalid.png',
+    bio: 'Plays competitive soccer and enjoys weekly pick-up games.',
+    preferredSports: ['Soccer'],
+    stats: {
+      'Total Matches': '68',
+      'Ranked': '40',
+      'Casual': '28',
+      'Win/Loss': '30 / 38',
+      'Current Rank': 'Silver',
+      'Most Played': 'Soccer',
+      'Last Match': 'Apr 29 • Lost',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 29', description: '❌ Lost • Soccer', sport: 'Soccer'),
+    ],
+    friends: ['Ali', 'Ravi'],
+    score: 980,
+  ),
+  User(
+    name: 'Farah',
+    location: 'Mississauga, ON',
+    profileImagePath: 'assets/farah.png',
+    bio: 'Cricket enthusiast and strategic batswoman.',
+    preferredSports: ['Cricket'],
+    stats: {
+      'Total Matches': '55',
+      'Ranked': '35',
+      'Casual': '20',
+      'Win/Loss': '31 / 24',
+      'Current Rank': 'Gold I',
+      'Most Played': 'Cricket',
+      'Last Match': 'Apr 28 • Won',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 28', description: '🏆 Won • Cricket', sport: 'Cricket'),
+    ],
+    friends: ['Leila', 'Sara'],
+    score: 940,
+  ),
+  User(
+    name: 'Ravi',
+    location: 'Brampton, ON',
+    profileImagePath: 'assets/ravi.png',
+    bio: 'Enjoys basketball and building team strategies.',
+    preferredSports: ['Basketball'],
+    stats: {
+      'Total Matches': '50',
+      'Ranked': '25',
+      'Casual': '25',
+      'Win/Loss': '22 / 28',
+      'Current Rank': 'Bronze II',
+      'Most Played': 'Basketball',
+      'Last Match': 'Apr 27 • Lost',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 27', description: '❌ Lost • Basketball', sport: 'Basketball'),
+    ],
+    friends: ['Khalid'],
+    score: 910,
+  ),
+  User(
+    name: 'Sara',
+    location: 'Halifax, NS',
+    profileImagePath: 'assets/sara.png',
+    bio: 'Tennis player who also loves doubles tournaments.',
+    preferredSports: ['Tennis'],
+    stats: {
+      'Total Matches': '65',
+      'Ranked': '30',
+      'Casual': '35',
+      'Win/Loss': '36 / 29',
+      'Current Rank': 'Silver II',
+      'Most Played': 'Tennis',
+      'Last Match': 'Apr 30 • Won',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 30', description: '🏆 Won • Tennis', sport: 'Tennis'),
+    ],
+    friends: ['Farah', 'Leila'],
+    score: 890,
+  ),
+  User(
+    name: 'John',
+    location: 'Montreal, QC',
+    profileImagePath: 'assets/john.png',
+    bio: 'Football fanatic and long-time team player.',
+    preferredSports: ['Football'],
+    stats: {
+      'Total Matches': '73',
+      'Ranked': '40',
+      'Casual': '33',
+      'Win/Loss': '39 / 34',
+      'Current Rank': 'Gold II',
+      'Most Played': 'Football',
+      'Last Match': 'Apr 25 • Won',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 25', description: '🏆 Won • Football', sport: 'Football'),
+    ],
+    friends: ['Zara'],
+    score: 870,
+  ),
+  User(
+    name: 'Tina',
+    location: 'London, ON',
+    profileImagePath: 'assets/tina.png',
+    bio: 'Badminton champion in local leagues.',
+    preferredSports: ['Badminton'],
+    stats: {
+      'Total Matches': '40',
+      'Ranked': '20',
+      'Casual': '20',
+      'Win/Loss': '28 / 12',
+      'Current Rank': 'Platinum',
+      'Most Played': 'Badminton',
+      'Last Match': 'Apr 24 • Won',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 24', description: '🏆 Won • Badminton', sport: 'Badminton'),
+    ],
+    friends: ['Sara'],
+    score: 850,
+  ),
+  User(
+    name: 'Ali',
+    location: 'Edmonton, AB',
+    profileImagePath: 'assets/ali.png',
+    bio: 'Volleyball spiker and fitness enthusiast.',
+    preferredSports: ['Volleyball'],
+    stats: {
+      'Total Matches': '60',
+      'Ranked': '38',
+      'Casual': '22',
+      'Win/Loss': '33 / 27',
+      'Current Rank': 'Silver I',
+      'Most Played': 'Volleyball',
+      'Last Match': 'Apr 23 • Lost',
+    },
+    upcomingMatches: [],
+    recentMatches: [
+      MatchInfo(date: 'Apr 23', description: '❌ Lost • Volleyball', sport: 'Volleyball'),
+    ],
+    friends: ['Khalid'],
+    score: 820,
+  ),
+];
+
 }

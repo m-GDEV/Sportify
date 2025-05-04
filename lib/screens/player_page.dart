@@ -56,7 +56,7 @@ class PlayerPage extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 45,
-                  backgroundImage: AssetImage('assets/profile_pic.png'),
+                  backgroundImage: AssetImage('profile_pic.png'),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -165,3 +165,4 @@ class _FriendChip extends StatelessWidget {
     );
   }
 }
+
