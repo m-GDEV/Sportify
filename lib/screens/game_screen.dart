@@ -69,10 +69,7 @@ class GamesScreen extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFF388E3C),
-                Color(0xFF2E7D32),
-              ],
+              colors: [Color(0xFF1B5E20), Colors.black],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -105,6 +102,13 @@ class GamesScreen extends StatelessWidget {
               color: Colors.grey[850],
               border: Border.all(color: Colors.green.shade800),
               borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.greenAccent.withOpacity(0.2),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                )
+              ],
             ),
             child: ListTile(
               title: Text(
@@ -200,7 +204,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                   .map((name) => Chip(
                         avatar: CircleAvatar(child: Text(name[0])),
                         label: Text(name),
-                        backgroundColor: const Color(0xFF1E1E1E),
+                        backgroundColor: Colors.grey[850],
                         labelStyle: const TextStyle(color: Colors.white),
                       ))
                   .toList(),

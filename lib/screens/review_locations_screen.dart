@@ -34,7 +34,7 @@ class ReviewLocationsScreen extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF388E3C), Color(0xFF2E7D32)],
+              colors: [Color(0xFF1B5E20), Colors.black],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -45,19 +45,14 @@ class ReviewLocationsScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             centerTitle: false,
             titleSpacing: 16,
-            title: const Row(
-              children: [
-                SizedBox(width: 10),
-                Text(
-                  'Nearby Locations',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.white,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ],
+            title: const Text(
+              'Nearby Locations',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Colors.white,
+                letterSpacing: 0.5,
+              ),
             ),
           ),
         ),
@@ -71,7 +66,7 @@ class ReviewLocationsScreen extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               color: const Color(0xFF1E1E1E),
-              border: Border.all(color: Colors.green.shade700),
+              border: Border.all(color: Colors.green.shade800),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -110,7 +105,7 @@ class ReviewLocationsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           );
