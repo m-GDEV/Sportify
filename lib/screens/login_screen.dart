@@ -5,12 +5,12 @@ import 'package:sportify/main.dart';
 import 'package:sportify/screens/home_screen.dart';
 import 'package:sportify/util/AuthService.dart';
 
-class CreateAccountScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _CreateAccountScreenState extends State<CreateAccountScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   var email = "";
   var password = "";
 
@@ -32,7 +32,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: Text(
-                "Please create an account to get started",
+                "Please login to get started",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
               ),
             ),
@@ -69,7 +69,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText:
-                        'Enter a fun username that reflects your personality!',
+                        'Enter the password you used to sign up',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -92,16 +92,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   shadowColor: Colors.transparent,
                 ),
                 onPressed: () async{
-                  final res = await AuthService.registration(email: email, password: password);
+                  final res = await AuthService.login(email: email, password: password);
 
                   if (res!.contains('Success')) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigation()));
                   }
                   else {
                     showDialog<String> (context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Error creating an account'),
+                        title: const Text('Error logging in account'),
                         content: Text(res),
                         actions: <Widget>[
                           TextButton(

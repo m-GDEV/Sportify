@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sportify/screens/create_account_screen.dart';
+import 'package:sportify/screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/find_players_screen.dart';
 import 'screens/review_locations_screen.dart';
@@ -43,7 +44,6 @@ class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    CreateAccountScreen(),
     HomeScreen(),
     PlayersScreen(),
     ReviewLocationsScreen(),
@@ -56,9 +56,11 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
+    BottomNavigationBar? bottomNavBar;
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      bottomNavBar = BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -72,7 +74,19 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Locations'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
-      ),
-    );
+      );
+    }
+
+    Widget screen;
+    if (user == null) {
+      screen = CreateAccountScreen();
+    } else {
+      screen = _screens[_selectedIndex];
+    }
+
+    return Scaffold(
+      body: screen,
+      bottomNavigationBar: bottomNavBar,
+      );
   }
 }

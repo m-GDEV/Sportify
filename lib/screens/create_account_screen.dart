@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sportify/main.dart';
 import 'package:sportify/screens/home_screen.dart';
+import 'package:sportify/screens/login_screen.dart';
 import 'package:sportify/util/AuthService.dart';
 
 class CreateAccountScreen extends StatefulWidget {
@@ -69,7 +70,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText:
-                        'Enter a fun username that reflects your personality!',
+                        '',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -77,8 +78,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             ),
 
             ],),
+            Column(children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
               child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -95,7 +97,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   final res = await AuthService.registration(email: email, password: password);
 
                   if (res!.contains('Success')) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MainNavigation()));
                   }
                   else {
                     showDialog<String> (context: context,
@@ -116,7 +118,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 child: Text('Submit', style: TextStyle(fontSize: 48, color: Colors.white), 
               )),
                         ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(onPressed: () {
+
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+
+              }, child: Text('Already have an account? Log in here!', style: TextStyle(fontSize: 24, color: Colors.blue),), style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+              ),),
             )
+
+            ],)
           ],
         ),
       ),
