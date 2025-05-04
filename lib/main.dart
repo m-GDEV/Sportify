@@ -3,6 +3,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
 import 'package:sportify/screens/create_account_screen.dart';
 import 'package:sportify/screens/login_screen.dart';
+import 'package:sportify/util/api_keys.dart';
 import 'screens/home_screen.dart';
 import 'screens/find_players_screen.dart';
 import 'screens/review_locations_screen.dart';
@@ -11,6 +12,7 @@ import 'screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'screens/chats_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: 'tspmo');
+  var model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: GEMINI_KEY);
 }
 
 class MainNavigation extends StatefulWidget {
@@ -66,7 +68,8 @@ class _MainNavigationState extends State<MainNavigation> {
     HomeScreen(),
     GamesScreen(),
     ReviewLocationsScreen(),
-    ProfilePage(),
+    ProfilePage(externalPlayer: false,),
+    ChatsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -93,6 +96,7 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'Games'),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Locations'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
         ],
       );
     }
