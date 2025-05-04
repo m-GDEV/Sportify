@@ -99,7 +99,7 @@ class GamesScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E1E1E), // dark bubble color match
+              color: const Color(0xFF1E1E1E),
               border: Border.all(color: Colors.green.shade700),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
@@ -179,9 +179,30 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text('${game['sport']} Game'),
-        backgroundColor: Colors.green[900],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1B5E20), Colors.black],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+            title: Text(
+              '${game['sport']} Game',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -202,9 +223,12 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
               runSpacing: 8,
               children: rsvps
                   .map((name) => Chip(
-                        avatar: CircleAvatar(child: Text(name[0])),
+                        avatar: CircleAvatar(
+                          backgroundColor: Colors.grey[900],
+                          child: Text(name[0], style: const TextStyle(color: Colors.black)),
+                        ),
                         label: Text(name),
-                        backgroundColor: const Color(0xFF1E1E1E),
+                        backgroundColor: Colors.grey[900],
                         labelStyle: const TextStyle(color: Colors.white),
                       ))
                   .toList(),
@@ -215,16 +239,16 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                 onTap: isFull ? null : _handleRSVP,
                 child: Container(
                   margin: const EdgeInsets.only(top: 0),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E1E1E),
+                    color: isFull ? Colors.grey[800] : Colors.green,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.green[300]!),
+                    border: Border.all(color: Colors.green[200]!),
                   ),
                   child: Text(
                     isFull ? 'Full' : 'RSVP to this Game',
-                    style: const TextStyle(
-                      color: Colors.greenAccent,
+                    style: TextStyle(
+                      color: isFull ? Colors.white : Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       letterSpacing: 0.5,

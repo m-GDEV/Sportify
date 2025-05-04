@@ -5,7 +5,6 @@ class FilteredGamesScreen extends StatelessWidget {
 
   FilteredGamesScreen({Key? key, required this.selectedSport}) : super(key: key);
 
-
   final List<Map<String, dynamic>> nearbyGames = [
     {
       'sport': 'Basketball',
@@ -31,7 +30,6 @@ class FilteredGamesScreen extends StatelessWidget {
       'rsvpLimit': 10,
       'rsvps': ['Arjun', 'Leila', 'Marcus', 'Nina', 'Leo', 'Aryan']
     },
-    // ... Add more if needed
   ];
 
   @override
@@ -41,12 +39,40 @@ class FilteredGamesScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nearby $selectedSport Games'),
-        backgroundColor: Colors.green[700],
+      backgroundColor: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1B5E20), Colors.black],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+            title: Text(
+              'Nearby $selectedSport Games',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ),
+        ),
       ),
       body: filtered.isEmpty
-          ? const Center(child: Text('No games found for this sport.'))
+          ? const Center(
+              child: Text(
+                'No games found for this sport.',
+                style: TextStyle(color: Colors.white70),
+              ),
+            )
           : ListView.builder(
               itemCount: filtered.length,
               itemBuilder: (context, index) {
@@ -55,24 +81,33 @@ class FilteredGamesScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.green[50],
-                    border: Border.all(color: Colors.green.shade100),
+                    color: const Color(0xFF1E1E1E),
+                    border: Border.all(color: Colors.green.shade800),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: ListTile(
                     title: Text(
                       '${game['sport']} • ${game['time']}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                    subtitle: Text('${game['location']} • ${game['distance']}'),
-                    trailing: Text('${game['rsvps'].length}/${game['rsvpLimit']}'),
+                    subtitle: Text(
+                      '${game['location']} • ${game['distance']}',
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+                    trailing: Text(
+                      '${game['rsvps'].length}/${game['rsvpLimit']}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
                     onTap: () {
                       Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => GameDetailScreen(game: game),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => GameDetailScreen(game: game),
+                        ),
+                      );
                     },
                   ),
                 );
@@ -118,55 +153,78 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
     final isFull = rsvps.length >= game['rsvpLimit'];
 
     return Scaffold(
-      appBar: AppBar(title: Text('${game['sport']} Game')),
+      backgroundColor: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF1B5E20), Colors.black],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            iconTheme: const IconThemeData(color: Colors.white),
+            title: Text(
+              '${game['sport']} Game',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('🕒 ${game['time']}', style: const TextStyle(fontSize: 16)),
-            Text('📍 ${game['location']}', style: const TextStyle(fontSize: 16)),
-            Text('📏 ${game['distance']}', style: const TextStyle(fontSize: 16)),
+            Text('🕒 ${game['time']}', style: const TextStyle(fontSize: 16, color: Colors.white)),
+            Text('📍 ${game['location']}', style: const TextStyle(fontSize: 16, color: Colors.white)),
+            Text('📏 ${game['distance']}', style: const TextStyle(fontSize: 16, color: Colors.white)),
             const SizedBox(height: 20),
-            Text('Players Attending (${rsvps.length}/${game['rsvpLimit']})',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              'Players Attending (${rsvps.length}/${game['rsvpLimit']})',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            ),
             const SizedBox(height: 10),
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: rsvps
-                  .map((name) => Chip(
-                        avatar: CircleAvatar(child: Text(name[0])),
-                        label: Text(name),
-                        backgroundColor: Colors.green[100],
-                      ))
-                  .toList(),
+              children: rsvps.map((name) => Chip(
+                avatar: CircleAvatar(child: Text(name[0])),
+                label: Text(name),
+                backgroundColor: Colors.green[100],
+              )).toList(),
             ),
             const Spacer(),
             Center(
-            child: GestureDetector(
-              onTap: isFull ? null : _handleRSVP,
-              child: Container(
-                margin: const EdgeInsets.only(top: 0),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.green[50],
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.green[100]!),
-                ),
-                child: Text(
-                  isFull ? 'Full' : 'RSVP to this Game',
-                  style: TextStyle(
-                    color: Colors.green[800],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    letterSpacing: 0.5,
+              child: GestureDetector(
+                onTap: isFull ? null : _handleRSVP,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: isFull ? Colors.grey[800] : Colors.green[50],
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.green[100]!),
+                  ),
+                  child: Text(
+                    isFull ? 'Full' : 'RSVP to this Game',
+                    style: TextStyle(
+                      color: isFull ? Colors.white54 : Colors.green[800],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      letterSpacing: 0.5,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-
           ],
         ),
       ),
