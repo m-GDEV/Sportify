@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:provider/provider.dart';
 import 'package:sportify/screens/create_account_screen.dart';
 import 'package:sportify/screens/login_screen.dart';
 import 'screens/home_screen.dart';
@@ -25,13 +26,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(create: (context) => MyAppState(),
+      child: MaterialApp(
       title: 'Sportify',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const MainNavigation(),
-    );
+    )
+      );
   }
 }
 
