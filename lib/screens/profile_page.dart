@@ -34,7 +34,7 @@ class ProfilePage extends StatelessWidget {
             iconTheme: const IconThemeData(color: Colors.white),
             titleSpacing: 16,
             title: Text(
-              externalPlayer ? 'My Profile' : '${user.name}\'s Profile',
+              !externalPlayer ? 'hy Profile' : '${user.name}\'s Profile',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
