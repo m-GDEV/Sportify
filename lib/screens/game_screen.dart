@@ -99,8 +99,8 @@ class GamesScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.grey[850],
-              border: Border.all(color: Colors.green.shade800),
+              color: const Color(0xFF1E1E1E), // dark bubble color match
+              border: Border.all(color: Colors.green.shade700),
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -204,7 +204,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                   .map((name) => Chip(
                         avatar: CircleAvatar(child: Text(name[0])),
                         label: Text(name),
-                        backgroundColor: Colors.grey[850],
+                        backgroundColor: const Color(0xFF1E1E1E),
                         labelStyle: const TextStyle(color: Colors.white),
                       ))
                   .toList(),
@@ -217,7 +217,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                   margin: const EdgeInsets.only(top: 0),
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
                   decoration: BoxDecoration(
-                    color: Colors.grey[850],
+                    color: const Color(0xFF1E1E1E),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.green[300]!),
                   ),
