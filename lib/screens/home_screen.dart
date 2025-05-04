@@ -11,8 +11,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   String? selectedSport;
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
 
   final List<Map<String, dynamic>> sports = [
     {'name': 'Soccer', 'icon': Icons.sports_soccer},
@@ -36,17 +38,35 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeIn,
+    );
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFFA8E6A2),
-                Color(0xFF6FCF97),
-              ],
+              colors: [Color(0xFF1B5E20), Colors.black],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -76,7 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const Text(
                 'Hey Milind,\nwant to play today?',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(height: 16),
               SizedBox(
@@ -84,15 +108,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: sports.map((sport) {
-                    return SportCard(
-                      name: sport['name'],
-                      icon: sport['icon'],
-                      isSelected: selectedSport == sport['name'],
-                      onTap: () {
-                        setState(() {
-                          selectedSport = sport['name'];
-                        });
-                      },
+                    final isSelected = selectedSport == sport['name'];
+                    return Container(
+                      margin: const EdgeInsets.only(right: 12),
+                      padding: const EdgeInsets.all(12),
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: isSelected ? Colors.green[700] : Colors.grey[850],
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: Colors.greenAccent.withOpacity(0.4),
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                )
+                              ]
+                            : [],
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedSport = sport['name'];
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(sport['icon'], size: 24, color: Colors.greenAccent),
+                            const SizedBox(height: 8),
+                            Text(
+                              sport['name'],
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -106,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FilteredGamesScreen(selectedSport: selectedSport!),
+                          builder: (context) =>
+                              FilteredGamesScreen(selectedSport: selectedSport!),
                         ),
                       );
                     },
@@ -114,14 +166,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: const EdgeInsets.only(top: 0),
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
                       decoration: BoxDecoration(
-                        color: Colors.green[50],
-                        border: Border.all(color: Colors.green.shade100),
+                        color: Colors.green[800],
+                        border: Border.all(color: Colors.green.shade300),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Text(
                         'Find Games Near You',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           letterSpacing: 0.5,
@@ -130,10 +182,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-
-
-              
-              LeaderboardCard(players: leaderboardData),
+              const SizedBox(height: 24),
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Leaderboard',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // updated
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    LeaderboardCard(players: leaderboardData),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

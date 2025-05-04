@@ -10,7 +10,6 @@ import 'screens/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-// import 'util/api_keys.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,12 +68,13 @@ class _MainNavigationState extends State<MainNavigation> {
     if (user != null) {
       bottomNavBar = BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.black,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.green[500], // Dark green for selected items
-        unselectedItemColor: Colors.green[300], // Slightly lighter green for unselected items
-        selectedLabelStyle: TextStyle(color: Colors.green[500], fontWeight: FontWeight.bold), // Ensure selected label matches selected item color
-        unselectedLabelStyle: TextStyle(color: Colors.green[300]), // Ensure unselected label matches unselected item color
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.white,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'Games'),
@@ -94,6 +94,6 @@ class _MainNavigationState extends State<MainNavigation> {
     return Scaffold(
       body: screen,
       bottomNavigationBar: bottomNavBar,
-      );
+    );
   }
 }

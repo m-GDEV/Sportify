@@ -13,7 +13,11 @@ class LeaderboardCard extends StatelessWidget {
       children: [
         const Text(
           "Leaderboard",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white, // Heading stays white
+          ),
         ),
         const SizedBox(height: 12),
         ...players.asMap().entries.map((entry) {
@@ -55,7 +59,7 @@ class _LeaderboardEntry extends StatelessWidget {
       default:
         return Padding(
           padding: EdgeInsets.only(left: rank == 10 ? 0 : 4),
-          child: Icon(Icons.circle, size: 8, color: Colors.grey[400]),
+          child: Icon(Icons.circle, size: 8, color: Colors.greenAccent),
         );
     }
   }
@@ -79,9 +83,9 @@ class _LeaderboardEntry extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.green[50],
+          color: const Color(0xFF1E1E1E),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.green.shade100),
+          border: Border.all(color: Colors.green.shade700),
         ),
         margin: const EdgeInsets.symmetric(vertical: 6),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -95,6 +99,7 @@ class _LeaderboardEntry extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
+                        color: Colors.greenAccent,
                       ),
                     ),
                   )
@@ -109,13 +114,14 @@ class _LeaderboardEntry extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
+                      color: Colors.greenAccent, // Player name green
                     ),
                   ),
                   Text(
                     sport,
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.grey[700],
+                      color: Colors.white.withOpacity(0.8), // Sport white
                     ),
                   ),
                 ],
@@ -126,12 +132,12 @@ class _LeaderboardEntry extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Colors.greenAccent, // Points green
               ),
             ),
             const Icon(
               Icons.stars_rounded,
-              color: Colors.green,
+              color: Colors.greenAccent,
               size: 20,
             ),
           ],
