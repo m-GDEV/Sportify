@@ -24,37 +24,38 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1B5E20), Colors.black],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF1B5E20), Colors.black],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(width: 10),
-                Image.asset(
-                  'lib/assets/Sportify_logo.png',
-                  height: 60,
-                ),
-              ],
-            ),
+        ),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(width: 10),
+              Image.asset(
+                'lib/assets/Sportify_logo.png',
+                height: 60,
+              ),
+            ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
+    ),
+    body: SafeArea(
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -71,26 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               SizedBox(
                 height: 80,
-                child: SizedBox(
-                  height: 80,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: sports.map((sport) {
-                      final isSelected = selectedSport == sport['name'];
-                      return SportCard(
-                        name: sport['name'],
-                        icon: sport['icon'],
-                        isSelected: isSelected,
-                        onTap: () {
-                          setState(() {
-                            selectedSport = sport['name'];
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: sports.map((sport) {
+                    final isSelected = selectedSport == sport['name'];
+                    return SportCard(
+                      name: sport['name'],
+                      icon: sport['icon'],
+                      isSelected: isSelected,
+                      onTap: () {
+                        setState(() {
+                          selectedSport = sport['name'];
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
-
               ),
               const SizedBox(height: 20),
               if (selectedSport != null)
@@ -132,8 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
 
   final List<User> leaderboardUsers = [

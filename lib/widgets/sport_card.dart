@@ -67,24 +67,27 @@ class _SportCardState extends State<SportCard> with SingleTickerProviderStateMix
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: Colors.green),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SlideTransition(
-              position: _offsetAnimation,
-              child: Icon(widget.icon, size: 26, color: widget.isSelected ? Colors.white : Colors.green),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.name,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-                color: widget.isSelected ? Colors.white : iconColor,
+        child:  FittedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SlideTransition(
+                position: _offsetAnimation,
+                child: Icon(widget.icon, size: 26, color: widget.isSelected ? Colors.white : Colors.green),
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                widget.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                  color: widget.isSelected ? Colors.white : iconColor,
+                ),
+              ),
+            ],
+          ),
         ),
+
       ),
     );
   }
